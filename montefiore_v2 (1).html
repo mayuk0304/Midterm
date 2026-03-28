@@ -1465,14 +1465,17 @@ footer a:hover{color:var(--accent)}
     <i class="fa-solid fa-images" style="margin-right:.5rem;color:var(--accent)"></i>
     Upload Site Photography
   </h3>
-  <div class="compare-grid reveal">
+ <section id="compare" class="section s-dark">
 
-    <!-- BEFORE upload -->
-    <div class="img-upload-card" id="card-before">
-      <div class="img-upload-header">
-        <span class="img-label-before"><i class="fa-solid fa-circle-xmark" style="margin-right:.4rem"></i>Before</span>
-        <span class="img-label-badge">existing condition</span>
-      </div>
+  <div class="full-bleed">
+    <img src="before.png" alt="Before condition">
+  </div>
+
+  <div class="full-bleed">
+    <img src="after.png" alt="After design">
+  </div>
+
+</section>
       <div class="img-drop-zone" id="zone-before">
         <input type="file" accept="image/*" id="file-before" onchange="loadImage('before',this)"/>
         <img class="preview-img" id="preview-before" alt="Before image"/>
