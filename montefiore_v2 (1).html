@@ -1372,207 +1372,85 @@ footer a:hover{color:var(--accent)}
 <!-- ══════════════════════════════════
      BEFORE / AFTER — IMAGE UPLOAD
 ══════════════════════════════════ -->
-<section id="compare" class="section s-mid reveal">
+<section id="compare" class="section s-dark reveal">
   <div class="tag">Before & After</div>
-  <h2 class="sh">Upload Your Site<br>Photographs</h2>
+  <h2 class="sh">Upload Site Photography</h2>
   <div class="rule"></div>
-  <p class="lead">
-    Upload existing condition photos and proposed vision images below. These
-    will display side-by-side for your design review presentation.
-    Click or drag & drop images directly onto each panel.
-  </p>
 
-  <!-- ── Diagram comparison (always visible) ── -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2rem" class="reveal">
-    <div>
-      <div style="padding:.7rem 1.2rem;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem">
-        <div style="width:9px;height:9px;border-radius:50%;background:#f87171"></div>
-        <span style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f87171">Current Condition</span>
-      </div>
-      <svg viewBox="0 0 440 280" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#0c0c1a">
-        <defs>
-          <marker id="ra" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-            <path d="M0,0 L7,3.5 L0,7 Z" fill="#f87171"/>
-          </marker>
-        </defs>
-        <rect width="440" height="280" fill="#0c0c1a"/>
-        <rect x="0" y="0" width="60" height="280" fill="#111125"/>
-        <rect x="380" y="0" width="60" height="280" fill="#111125"/>
-        <rect x="60" y="0" width="320" height="280" fill="#0f0f20"/>
-        <rect x="62" y="10" width="16" height="260" fill="#5e35b1" opacity=".5"/>
-        <rect x="380" y="10" width="16" height="260" fill="#be185d" opacity=".5"/>
-        <rect x="110" y="110" width="85" height="14" rx="2" fill="#1e1e38"/>
-        <rect x="245" y="110" width="85" height="14" rx="2" fill="#1e1e38"/>
-        <text x="152" y="104" fill="rgba(248,113,113,.35)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">wrong dir.</text>
-        <text x="287" y="104" fill="rgba(248,113,113,.35)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">wrong dir.</text>
-        <path d="M220 265 L220 15" stroke="#f87171" stroke-width="2.5" marker-end="url(#ra)" opacity=".8"/>
-        <text x="220" y="250" fill="rgba(248,113,113,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">dwell &lt;2 min</text>
-        <text x="70" y="145" fill="rgba(248,113,113,.3)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(-90,70,145)">no light</text>
-        <text x="390" y="145" fill="rgba(248,113,113,.3)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(90,390,145)">no light</text>
-      </svg>
-    </div>
-    <div>
-      <div style="padding:.7rem 1.2rem;background:rgba(0,0,0,.3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem">
-        <div style="width:9px;height:9px;border-radius:50%;background:#34d399"></div>
-        <span style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#34d399">Proposed Design</span>
-      </div>
-      <svg viewBox="0 0 440 280" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#0c0c1a">
-        <defs>
-          <radialGradient id="pg" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#c084fc" stop-opacity=".25"/>
-            <stop offset="100%" stop-color="#c084fc" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="mc" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#f59e0b" stop-opacity=".2"/>
-            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
-          </radialGradient>
-          <marker id="ga3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-            <path d="M0,0 L7,3.5 L0,7 Z" fill="#34d399"/>
-          </marker>
-        </defs>
-        <rect width="440" height="280" fill="#0c0c1a"/>
-        <rect x="0" y="0" width="60" height="280" fill="#111125"/>
-        <rect x="380" y="0" width="60" height="280" fill="#111125"/>
-        <rect x="60" y="0" width="320" height="280" fill="#0f0f20"/>
-        <rect x="62" y="10" width="16" height="260" fill="#5e35b1" opacity=".8"/>
-        <rect x="380" y="10" width="16" height="260" fill="#be185d" opacity=".8"/>
-        <circle cx="70" cy="140" r="85" fill="url(#pg)"/>
-        <circle cx="388" cy="140" r="85" fill="url(#pg)"/>
-        <path d="M90 100 Q155 135 90 185" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="1.5"/>
-        <rect x="88" y="122" width="42" height="7" rx="2" fill="#34d399" opacity=".7"/>
-        <rect x="88" y="136" width="42" height="7" rx="2" fill="#34d399" opacity=".7"/>
-        <path d="M350 100 Q285 135 350 185" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="1.5"/>
-        <rect x="310" y="122" width="42" height="7" rx="2" fill="#34d399" opacity=".7"/>
-        <rect x="310" y="136" width="42" height="7" rx="2" fill="#34d399" opacity=".7"/>
-        <ellipse cx="220" cy="165" rx="60" ry="38" fill="rgba(244,114,182,.08)" stroke="rgba(244,114,182,.4)" stroke-width="1"/>
-        <circle cx="220" cy="140" r="80" fill="url(#mc)"/>
-        <text x="220" y="162" fill="rgba(244,114,182,.65)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">market zone</text>
-        <path d="M220 265 L220 15" stroke="rgba(52,211,153,.3)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ga3)"/>
-        <path d="M220 140 L100 140 M220 140 L340 140" stroke="rgba(52,211,153,.25)" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <text x="220" y="250" fill="rgba(52,211,153,.6)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">target dwell: 15-30 min</text>
-      </svg>
-    </div>
-  </div>
-
-  <!-- ── Photo upload panels ── -->
-  <h3 style="font-size:1rem;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:1rem;letter-spacing:.05em">
-    <i class="fa-solid fa-images" style="margin-right:.5rem;color:var(--accent)"></i>
-    Upload Site Photography
-  </h3>
   <div class="compare-grid reveal">
 
-    <!-- BEFORE upload -->
+    <!-- BEFORE -->
     <div class="img-upload-card" id="card-before">
       <div class="img-upload-header">
-        <span class="img-label-before"><i class="fa-solid fa-circle-xmark" style="margin-right:.4rem"></i>Before</span>
+        <span class="img-label-before">Before</span>
         <span class="img-label-badge">existing condition</span>
       </div>
-      <div class="img-drop-zone" id="zone-before">
-        <input type="file" accept="image/*" id="file-before" onchange="loadImage('before',this)"/>
-        <img class="preview-img" id="preview-before" alt="Before image"/>
-        <div class="img-replace"><span><i class="fa-solid fa-repeat" style="margin-right:.4rem"></i>Replace Photo</span></div>
-        <div class="drop-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-        <div class="drop-text">
-          <strong>Drop your "Before" photo here</strong>
-          Click to browse, or drag & drop a photo of the existing park condition
-        </div>
-        <div class="drop-sub">JPG · PNG · WEBP · up to 20MB</div>
-      </div>
-      <div class="img-caption-row">
-        <i class="fa-solid fa-pen-nib"></i>
-        <input type="text" placeholder="Add a caption, e.g. 'Existing condition — looking north, March 2025'" id="cap-before"/>
+
+      <div class="img-drop-zone has-image" id="zone-before">
+        <img src="before.png" class="preview-img" style="display:block;">
       </div>
     </div>
 
-    <!-- AFTER upload -->
+    <!-- AFTER -->
     <div class="img-upload-card" id="card-after">
       <div class="img-upload-header">
-        <span class="img-label-after"><i class="fa-solid fa-circle-check" style="margin-right:.4rem"></i>After</span>
-        <span class="img-label-badge">proposed / reference</span>
+        <span class="img-label-after">After</span>
+        <span class="img-label-badge">proposed design</span>
       </div>
-      <div class="img-drop-zone" id="zone-after">
-        <input type="file" accept="image/*" id="file-after" onchange="loadImage('after',this)"/>
-        <img class="preview-img" id="preview-after" alt="After image"/>
-        <div class="img-replace"><span><i class="fa-solid fa-repeat" style="margin-right:.4rem"></i>Replace Photo</span></div>
-        <div class="drop-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-        <div class="drop-text">
-          <strong>Drop your "After" photo here</strong>
-          Click to browse, or drag & drop a precedent image, rendering, or inspiration photo
+
+      <div class="img-drop-zone has-image" id="zone-after">
+        <img src="after.png" class="preview-img" style="display:block;">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ADDITIONAL PHOTOS -->
+  <div style="margin-top:3rem">
+    <h3 style="color:white;margin-bottom:1.5rem;">Additional Site Photos</h3>
+
+    <div class="compare-grid">
+
+      <!-- PHOTO 3 -->
+      <div class="img-upload-card">
+        <div class="img-upload-header">
+          <span>Photo 3</span>
+          <span class="img-label-badge">context</span>
         </div>
-        <div class="drop-sub">JPG · PNG · WEBP · up to 20MB</div>
-      </div>
-      <div class="img-caption-row">
-        <i class="fa-solid fa-pen-nib"></i>
-        <input type="text" placeholder="Add a caption, e.g. 'Proposed condition — mural-facing alcove with uplighting'" id="cap-after"/>
-      </div>
-    </div>
 
-  </div>
+        <div class="img-drop-zone has-image" id="zone-3">
+          <img src="mural.png" class="preview-img" style="display:block;">
+        </div>
+      </div>
 
-  <!-- Extra upload row for more photos -->
-  <h3 style="font-size:1rem;font-weight:600;color:rgba(255,255,255,.5);margin:2.5rem 0 1rem;letter-spacing:.05em">
-    <i class="fa-solid fa-layer-group" style="margin-right:.5rem;color:var(--accent)"></i>
-    Additional Site Photos
-  </h3>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem" class="reveal">
+      <!-- PHOTO 4 -->
+      <div class="img-upload-card">
+        <div class="img-upload-header">
+          <span>Photo 4</span>
+          <span class="img-label-badge">seating</span>
+        </div>
 
-    <div class="img-upload-card">
-      <div class="img-upload-header">
-        <span style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)">Photo 3</span>
-        <span class="img-label-badge">context</span>
+        <div class="img-drop-zone has-image" id="zone-4">
+          <img src="seating.png" class="preview-img" style="display:block;">
+        </div>
       </div>
-      <div class="img-drop-zone" id="zone-3">
-        <input type="file" accept="image/*" id="file-3" onchange="loadImage('3',this)"/>
-        <img class="preview-img" id="preview-3" alt="Photo 3"/>
-        <div class="img-replace"><span><i class="fa-solid fa-repeat" style="margin-right:.4rem"></i>Replace</span></div>
-        <div class="drop-icon" style="font-size:1.5rem"><i class="fa-solid fa-image"></i></div>
-        <div class="drop-text" style="font-size:.78rem"><strong style="font-size:.9rem">Mural closeup</strong>Existing mural detail</div>
-      </div>
-      <div class="img-caption-row">
-        <i class="fa-solid fa-pen-nib"></i>
-        <input type="text" placeholder="Caption…" id="cap-3"/>
-      </div>
-    </div>
 
-    <div class="img-upload-card">
-      <div class="img-upload-header">
-        <span style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)">Photo 4</span>
-        <span class="img-label-badge">precedent</span>
-      </div>
-      <div class="img-drop-zone" id="zone-4">
-        <input type="file" accept="image/*" id="file-4" onchange="loadImage('4',this)"/>
-        <img class="preview-img" id="preview-4" alt="Photo 4"/>
-        <div class="img-replace"><span><i class="fa-solid fa-repeat" style="margin-right:.4rem"></i>Replace</span></div>
-        <div class="drop-icon" style="font-size:1.5rem"><i class="fa-solid fa-image"></i></div>
-        <div class="drop-text" style="font-size:.78rem"><strong style="font-size:.9rem">Seating precedent</strong>Reference project photo</div>
-      </div>
-      <div class="img-caption-row">
-        <i class="fa-solid fa-pen-nib"></i>
-        <input type="text" placeholder="Caption…" id="cap-4"/>
-      </div>
-    </div>
+      <!-- PHOTO 5 -->
+      <div class="img-upload-card">
+        <div class="img-upload-header">
+          <span>Photo 5</span>
+          <span class="img-label-badge">vendors</span>
+        </div>
 
-    <div class="img-upload-card">
-      <div class="img-upload-header">
-        <span style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)">Photo 5</span>
-        <span class="img-label-badge">inspiration</span>
+        <div class="img-drop-zone has-image" id="zone-5">
+          <img src="vendors.png" class="preview-img" style="display:block;">
+        </div>
       </div>
-      <div class="img-drop-zone" id="zone-5">
-        <input type="file" accept="image/*" id="file-5" onchange="loadImage('5',this)"/>
-        <img class="preview-img" id="preview-5" alt="Photo 5"/>
-        <div class="img-replace"><span><i class="fa-solid fa-repeat" style="margin-right:.4rem"></i>Replace</span></div>
-        <div class="drop-icon" style="font-size:1.5rem"><i class="fa-solid fa-image"></i></div>
-        <div class="drop-text" style="font-size:.78rem"><strong style="font-size:.9rem">Market inspiration</strong>Reference market image</div>
-      </div>
-      <div class="img-caption-row">
-        <i class="fa-solid fa-pen-nib"></i>
-        <input type="text" placeholder="Caption…" id="cap-5"/>
-      </div>
+
     </div>
   </div>
-  <p class="compare-note">Images are stored in your browser only — they are never uploaded to a server.</p>
+
 </section>
-
 <!-- ══════════════════════════════════
      PROGRAMMING
 ══════════════════════════════════ -->
