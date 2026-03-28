@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Montefiore Park Redesign — Arts, Culture & Community</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+/* ─────────────────────────────────────────────
+   TOKENS & RESET
+───────────────────────────────────────────── */
+:root{
+  --c-bg:       #0e0e0e;
+  --c-bg2:      #141414;
+  --c-bg3:      #1a1a1a;
+  --c-panel:    #1f1f1f;
+  --c-accent:   #e8533a;
+  --c-gold:     #e8a83a;
+  --c-teal:     #3ecfb1;
+  --c-ivory:    #f5f0e8;
+  --c-text:     rgba(245,240,232,0.88);
+  --c-muted:    rgba(245,240,232,0.45);
+  --c-border:   rgba(245,240,232,0.08);
+  --c-border2:  rgba(245,240,232,0.14);
+  --sidebar-w:  260px;
+  --r:          3px;
+  --ff-head:    'Playfair Display', Georgia, serif;
+  --ff-body:    'DM Sans', sans-serif;
+  --ff-mono:    'DM Mono', monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--ff-body);
+  font-weight:300;
+  background:var(--c-bg);
+  color:var(--c-text);
+  line-height:1.75;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:var(--c-accent);text-decoration:none;transition:color .2s}
+a:hover{color:var(--c-gold)}
+::selection{background:var(--c-accent);color:#fff}
+
+/* ─────────────────────────────────────────────
+   SIDEBAR
+───────────────────────────────────────────── */
+#sidebar{
+  position:fixed;
+  top:0;left:0;
+  width:var(--sidebar-w);
+  height:100vh;
+  background:var(--c-bg2);
+  border-right:1px solid var(--c-border);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:2.5rem 1.8rem 2rem;
+  z-index:200;
+  overflow-y:auto;
+}
+
+.sidebar-brand{
+  font-family:var(--ff-head);
+  font-size:1.25rem;
+  font-weight:700;
+  line-height:1.2;
+  color:var(--c-ivory);
+  margin-bottom:0.35rem;
+}
+.sidebar-brand span{color:var(--c-accent)}
+.sidebar-sub{
+  font-size:0.68rem;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--c-muted);
+  margin-bottom:2.5rem;
+}
+
+#nav-menu{list-style:none}
+#nav-menu li{border-bottom:1px solid var(--c-border)}
+#nav-menu a{
+  display:flex;
+  align-items:center;
+  gap:0.7rem;
+  padding:.7rem 0;
+  font-size:.78rem;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--c-muted);
+  transition:color .2s,padding-left .2s;
+}
+#nav-menu a i{font-size:.75rem;width:14px;opacity:.7}
+#nav-menu a:hover,#nav-menu a.active{color:var(--c-accent);padding-left:.4rem}
+#nav-menu a.active i{opacity:1}
+
+.sidebar-footer{
+  font-size:.68rem;
+  color:rgba(245,240,232,.22);
+  line-height:1.7;
+  border-top:1px solid var(--c-border);
+  padding-top:1.2rem;
+  margin-top:1.5rem;
+}
+
+/* ─────────────────────────────────────────────
+   MAIN WRAPPER
+───────────────────────────────────────────── */
+#main{margin-left:var(--sidebar-w)}
+
+/* ─────────────────────────────────────────────
+   SECTION BASE
+───────────────────────────────────────────── */
+.section{
+  padding:6rem 5rem;
+  border-top:1px solid var(--c-border);
+  position:relative;
+}
+.section--dark{background:var(--c-bg)}
+.section--mid{background:var(--c-bg2)}
+.section--panel{background:var(--c-bg3)}
+.section--accent{background:var(--c-accent)}
+.section--teal{background:var(--c-teal)}
+
+.section-label{
+  font-size:.68rem;
+  font-weight:500;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--c-accent);
+  margin-bottom:1rem;
+}
+.section--accent .section-label{color:rgba(255,255,255,.65)}
+.section--teal .section-label{color:rgba(14,14,14,.55)}
+
+.section-title{
+  font-family:var(--ff-head);
+  font-size:clamp(2rem,4vw,3.4rem);
+  font-weight:700;
+  line-height:1.08;
+  letter-spacing:-.02em;
+  color:var(--c-ivory);
+  margin-bottom:1.2rem;
+}
+.section--accent .section-title,
+.section--teal .section-title{color:#0e0e0e}
+
+.section-body{
+  font-size:1rem;
+  font-weight:300;
+  line-height:1.85;
+  color:var(--c-muted);
+  max-width:640px;
+}
+.section--accent .section-body{color:rgba(14,14,14,.75)}
+.section--teal .section-body{color:rgba(14,14,14,.7)}
+
+.divider{
+  width:48px;height:3px;
+  background:var(--c-accent);
+  margin:1.4rem 0 2rem;
+}
+.section--accent .divider{background:rgba(14,14,14,.35)}
+.section--teal .divider{background:rgba(14,14,14,.35)}
+
+/* ─────────────────────────────────────────────
+   HERO (#intro)
+───────────────────────────────────────────── */
+#intro{
+  min-height:100vh;
+  display:flex;
+  align-items:flex-end;
+  padding:5rem;
+  border-top:none;
+  background:var(--c-bg);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-noise{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  opacity:.6;
+}
+
+/* large bg mural-inspired shape */
+.hero-shape{
+  position:absolute;
+  right:-80px;top:-60px;
+  width:56vw;height:100vh;
+  background:linear-gradient(145deg,rgba(232,83,58,.12) 0%,rgba(232,168,58,.06) 50%,transparent 80%);
+  clip-path:polygon(20% 0,100% 0,100% 100%,0 100%);
+  pointer-events:none;
+}
+
+.hero-content{position:relative;max-width:780px}
+
+.hero-eyebrow{
+  font-family:var(--ff-mono);
+  font-size:.72rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--c-accent);
+  margin-bottom:1.6rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.hero-eyebrow::before{
+  content:'';display:block;
+  width:32px;height:1px;
+  background:var(--c-accent);
+}
+
+.hero-title{
+  font-family:var(--ff-head);
+  font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:900;
+  line-height:.95;
+  letter-spacing:-.03em;
+  color:var(--c-ivory);
+  margin-bottom:2rem;
+}
+.hero-title em{
+  font-style:italic;
+  color:var(--c-accent);
+}
+
+.hero-body{
+  font-size:1.1rem;
+  font-weight:300;
+  line-height:1.85;
+  color:var(--c-muted);
+  max-width:540px;
+  margin-bottom:2.8rem;
+}
+
+.btn-group{display:flex;flex-wrap:wrap;gap:.8rem}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.8rem 1.9rem;
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  transition:all .2s;
+  cursor:pointer;
+}
+.btn-primary{
+  background:var(--c-accent);
+  color:#fff;
+  border:2px solid var(--c-accent);
+}
+.btn-primary:hover{
+  background:transparent;
+  color:var(--c-accent);
+  transform:translateY(-2px);
+}
+.btn-outline{
+  background:transparent;
+  color:var(--c-ivory);
+  border:2px solid var(--c-border2);
+}
+.btn-outline:hover{
+  border-color:var(--c-ivory);
+  transform:translateY(-2px);
+}
+
+.hero-scroll{
+  position:absolute;
+  right:5rem;bottom:3rem;
+  display:flex;flex-direction:column;
+  align-items:center;gap:.5rem;
+  font-size:.62rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--c-muted);
+}
+.hero-scroll-line{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,var(--c-accent),transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ─────────────────────────────────────────────
+   STAT BAR
+───────────────────────────────────────────── */
+.stat-bar{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--c-border);
+}
+.stat-item{
+  padding:2.2rem 2rem;
+  border-right:1px solid var(--c-border);
+  transition:background .2s;
+}
+.stat-item:last-child{border-right:none}
+.stat-item:hover{background:var(--c-panel)}
+.stat-num{
+  font-family:var(--ff-head);
+  font-size:2.6rem;
+  font-weight:700;
+  line-height:1;
+  color:var(--c-accent);
+  margin-bottom:.3rem;
+}
+.stat-label{
+  font-size:.72rem;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--c-muted);
+}
+
+/* ─────────────────────────────────────────────
+   SPOTLIGHT PANELS (#context)
+───────────────────────────────────────────── */
+.spotlight{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:28rem;
+  border-top:1px solid var(--c-border);
+}
+.spotlight.flip{direction:rtl}
+.spotlight.flip > *{direction:ltr}
+
+.spotlight-visual{
+  overflow:hidden;
+  position:relative;
+  background:var(--c-panel);
+}
+.spotlight-visual svg{
+  width:100%;height:100%;
+  transition:transform .5s ease;
+}
+.spotlight:hover .spotlight-visual svg{transform:scale(1.02)}
+
+.spotlight-content{
+  padding:4rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:var(--c-bg2);
+}
+.spotlight.flip .spotlight-content{background:var(--c-bg3)}
+
+.problem-tag{
+  display:inline-block;
+  padding:.25rem .75rem;
+  background:rgba(232,83,58,.15);
+  color:var(--c-accent);
+  font-size:.65rem;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  margin-bottom:1.2rem;
+}
+
+.spotlight-content h3{
+  font-family:var(--ff-head);
+  font-size:1.7rem;
+  font-weight:700;
+  line-height:1.2;
+  color:var(--c-ivory);
+  margin-bottom:1rem;
+}
+
+.spotlight-content p{
+  font-size:.93rem;
+  line-height:1.85;
+  color:var(--c-muted);
+}
+
+/* ─────────────────────────────────────────────
+   DIAGRAM FULL SECTION
+───────────────────────────────────────────── */
+.diagram-wrap{
+  margin-top:3rem;
+  border:1px solid var(--c-border);
+  background:var(--c-panel);
+  overflow:hidden;
+}
+.diagram-caption{
+  padding:.9rem 1.4rem;
+  border-top:1px solid var(--c-border);
+  font-family:var(--ff-mono);
+  font-size:.7rem;
+  color:var(--c-muted);
+  display:flex;justify-content:space-between;
+}
+
+/* ─────────────────────────────────────────────
+   PROPOSALS GRID (#proposals)
+───────────────────────────────────────────── */
+.proposals-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--c-border);
+  margin-top:3.5rem;
+  border:1px solid var(--c-border);
+}
+
+.proposal-card{
+  background:var(--c-bg2);
+  padding:2.2rem 1.8rem 2rem;
+  transition:background .2s;
+  position:relative;
+  overflow:hidden;
+}
+.proposal-card::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:2px;
+  background:var(--c-accent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s ease;
+}
+.proposal-card:hover{background:var(--c-panel)}
+.proposal-card:hover::after{transform:scaleX(1)}
+
+.proposal-card:nth-child(2)::after{background:var(--c-gold)}
+.proposal-card:nth-child(3)::after{background:var(--c-teal)}
+.proposal-card:nth-child(4)::after{background:var(--c-teal)}
+.proposal-card:nth-child(5)::after{background:var(--c-gold)}
+.proposal-card:nth-child(6)::after{background:var(--c-accent)}
+
+.prop-icon{
+  width:42px;height:42px;
+  background:rgba(232,83,58,.12);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.2rem;
+  font-size:1rem;
+  color:var(--c-accent);
+}
+.proposal-card:nth-child(2) .prop-icon{background:rgba(232,168,58,.12);color:var(--c-gold)}
+.proposal-card:nth-child(3) .prop-icon,
+.proposal-card:nth-child(4) .prop-icon{background:rgba(62,207,177,.12);color:var(--c-teal)}
+.proposal-card:nth-child(5) .prop-icon{background:rgba(232,168,58,.12);color:var(--c-gold)}
+
+.proposal-card h3{
+  font-family:var(--ff-head);
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--c-ivory);
+  margin-bottom:.6rem;
+  line-height:1.25;
+}
+.proposal-card p{
+  font-size:.85rem;
+  line-height:1.75;
+  color:var(--c-muted);
+}
+
+/* ─────────────────────────────────────────────
+   MOCKUP GRID (#mockups)
+───────────────────────────────────────────── */
+.mockup-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+  margin-top:3rem;
+}
+.mockup-card{
+  background:var(--c-panel);
+  border:1px solid var(--c-border);
+  overflow:hidden;
+}
+.mockup-card.wide{grid-column:span 2}
+.mockup-label{
+  padding:.8rem 1.2rem;
+  font-family:var(--ff-mono);
+  font-size:.68rem;
+  color:var(--c-muted);
+  border-bottom:1px solid var(--c-border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.mockup-label span{
+  padding:.1rem .5rem;
+  background:rgba(62,207,177,.12);
+  color:var(--c-teal);
+  font-size:.6rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+/* ─────────────────────────────────────────────
+   PROGRAMMING SECTION (#programming)
+───────────────────────────────────────────── */
+.prog-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:rgba(14,14,14,.35);
+  margin-top:3rem;
+  border:1px solid rgba(14,14,14,.2);
+}
+.prog-card{
+  background:rgba(14,14,14,.1);
+  padding:1.8rem 1.4rem;
+  transition:background .2s;
+}
+.prog-card:hover{background:rgba(14,14,14,.2)}
+.prog-day{
+  font-family:var(--ff-mono);
+  font-size:.62rem;
+  font-weight:400;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(14,14,14,.5);
+  margin-bottom:.8rem;
+}
+.prog-card h4{
+  font-family:var(--ff-head);
+  font-size:1rem;
+  font-weight:700;
+  color:#0e0e0e;
+  margin-bottom:.5rem;
+  line-height:1.25;
+}
+.prog-card p{font-size:.8rem;color:rgba(14,14,14,.65);line-height:1.65}
+.prog-tag{
+  display:inline-block;
+  margin-top:.75rem;
+  padding:.15rem .6rem;
+  background:rgba(14,14,14,.15);
+  color:rgba(14,14,14,.55);
+  font-size:.6rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+/* ─────────────────────────────────────────────
+   BEFORE/AFTER COMPARISON
+───────────────────────────────────────────── */
+.compare-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--c-border);
+  margin-top:3rem;
+}
+.compare-panel{background:var(--c-panel)}
+.compare-header{
+  padding:1rem 1.5rem;
+  border-bottom:1px solid var(--c-border);
+  font-family:var(--ff-mono);
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  display:flex;align-items:center;gap:.5rem;
+}
+.compare-header .dot{
+  width:8px;height:8px;
+  border-radius:50%;
+}
+.dot-red{background:#e84e4e}
+.dot-green{background:var(--c-teal)}
+
+/* ─────────────────────────────────────────────
+   CONTACT (#contact)
+───────────────────────────────────────────── */
+.contact-split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  margin-top:3rem;
+}
+
+label{
+  display:block;
+  font-size:.68rem;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--c-muted);
+  margin-bottom:.4rem;
+}
+input,textarea,select{
+  width:100%;
+  background:rgba(245,240,232,.04);
+  border:1px solid var(--c-border2);
+  color:var(--c-ivory);
+  padding:.75rem 1rem;
+  font-family:var(--ff-body);
+  font-size:.9rem;
+  font-weight:300;
+  outline:none;
+  transition:border-color .2s;
+  margin-bottom:1.2rem;
+}
+input:focus,textarea:focus{border-color:var(--c-accent)}
+textarea{min-height:120px;resize:vertical}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+.contact-info li{
+  list-style:none;
+  padding:1.1rem 0;
+  border-bottom:1px solid var(--c-border);
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.contact-info i{
+  margin-top:.15rem;
+  color:var(--c-accent);
+  width:16px;flex-shrink:0;
+}
+.contact-info strong{
+  display:block;
+  font-size:.68rem;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--c-muted);
+  margin-bottom:.2rem;
+}
+.contact-info span{font-size:.88rem;color:var(--c-text)}
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+footer{
+  background:var(--c-bg);
+  border-top:1px solid var(--c-border);
+  padding:2rem 5rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
+  font-size:.75rem;
+  color:var(--c-muted);
+}
+footer a{color:var(--c-muted)}
+footer a:hover{color:var(--c-accent)}
+
+/* ─────────────────────────────────────────────
+   SCROLL REVEAL
+───────────────────────────────────────────── */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:none}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media(max-width:1100px){
+  :root{--sidebar-w:0px}
+  #sidebar{display:none}
+  #main{margin-left:0}
+  .section{padding:4rem 2.5rem}
+  #intro{padding:3rem 2.5rem 5rem}
+  .spotlight{grid-template-columns:1fr}
+  .spotlight.flip{direction:ltr}
+  .spotlight-visual{min-height:240px}
+  .proposals-grid{grid-template-columns:1fr 1fr}
+  .mockup-grid{grid-template-columns:1fr}
+  .mockup-card.wide{grid-column:span 1}
+  .compare-wrap{grid-template-columns:1fr}
+  .contact-split{grid-template-columns:1fr;gap:2.5rem}
+  .stat-bar{grid-template-columns:1fr 1fr}
+  .stat-item:nth-child(2){border-right:none}
+  .prog-grid{grid-template-columns:1fr 1fr}
+  footer{padding:1.5rem 2.5rem;flex-direction:column;text-align:center}
+  .hero-scroll{display:none}
+}
+@media(max-width:640px){
+  .proposals-grid{grid-template-columns:1fr}
+  .prog-grid{grid-template-columns:1fr}
+  .stat-bar{grid-template-columns:1fr}
+  .stat-item{border-right:none}
+  .form-row{grid-template-columns:1fr}
+  .hero-title{font-size:2.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════ -->
+<aside id="sidebar">
+  <div>
+    <div class="sidebar-brand">Monte<span>fiore</span><br>Park</div>
+    <div class="sidebar-sub">Bronx, New York</div>
+    <ul id="nav-menu">
+      <li><a href="#intro" class="active"><i class="fa-solid fa-house"></i>Overview</a></li>
+      <li><a href="#context"><i class="fa-solid fa-triangle-exclamation"></i>The Problem</a></li>
+      <li><a href="#analysis"><i class="fa-solid fa-map"></i>Site Analysis</a></li>
+      <li><a href="#proposals"><i class="fa-solid fa-lightbulb"></i>Proposals</a></li>
+      <li><a href="#mockups"><i class="fa-solid fa-draw-polygon"></i>Design Visuals</a></li>
+      <li><a href="#programming"><i class="fa-solid fa-calendar-days"></i>Programming</a></li>
+      <li><a href="#compare"><i class="fa-solid fa-code-compare"></i>Before / After</a></li>
+      <li><a href="#contact"><i class="fa-solid fa-envelope"></i>Get Involved</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-footer">
+    Urban Design Studio<br>
+    Academic Design Review · 2025<br>
+    Bronx Community Initiative
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════════
+     MAIN
+════════════════════════════════════════ -->
+<div id="main">
+
+<!-- ─── HERO ─── -->
+<section id="intro">
+  <div class="hero-noise"></div>
+  <div class="hero-shape"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Urban Design Proposal · Montefiore Park, Bronx NY</div>
+    <h1 class="hero-title">
+      From <em>Corridor</em><br>to Cultural<br>Plaza
+    </h1>
+    <p class="hero-body">
+      Montefiore Park holds world-class community murals, rich Bronx history, and
+      a neighborhood that deserves better. Right now it functions as a shortcut.
+      This proposal transforms it into a pedestrian-centered arts and culture
+      destination — with seating, light, vendors, and a reason to stay.
+    </p>
+    <div class="btn-group">
+      <a href="#proposals" class="btn btn-primary"><i class="fa-solid fa-arrow-down"></i>See the Design</a>
+      <a href="#analysis" class="btn btn-outline">Site Analysis</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<div class="stat-bar">
+  <div class="stat-item reveal">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Mural Walls</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Seats Facing Art</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">12K</div>
+    <div class="stat-label">Weekly Passers-by</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">~2min</div>
+    <div class="stat-label">Avg. Dwell Time</div>
+  </div>
+</div>
+
+<!-- ─── THE PROBLEM ─── -->
+<section id="context" class="section section--dark" style="padding-bottom:0">
+  <div class="reveal">
+    <div class="section-label">Context & Problem</div>
+    <h2 class="section-title">A Park That<br>People Pass Through</h2>
+    <div class="divider"></div>
+    <p class="section-body">
+      Montefiore Park sits at the intersection of Tremont and Morris Avenues in the Bronx.
+      Despite its extraordinary murals and cultural significance, its current design
+      actively discourages lingering. Three core failures define the existing condition.
+    </p>
+  </div>
+</section>
+
+<!-- Spotlight 1 -->
+<div class="spotlight reveal">
+  <div class="spotlight-visual">
+    <!-- SVG: Existing corridor diagram -->
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="600" height="420" fill="#141414"/>
+      <!-- Ground -->
+      <rect x="0" y="240" width="600" height="180" fill="#1a1a1a"/>
+      <!-- Path / corridor -->
+      <rect x="160" y="0" width="280" height="420" fill="#1f1f1f"/>
+      <line x1="160" y1="0" x2="160" y2="420" stroke="#e8533a" stroke-width="1" stroke-dasharray="8,4"/>
+      <line x1="440" y1="0" x2="440" y2="420" stroke="#e8533a" stroke-width="1" stroke-dasharray="8,4"/>
+      <!-- Mural walls left -->
+      <rect x="60" y="40" width="90" height="360" fill="#222" rx="2"/>
+      <rect x="62" y="60" width="86" height="80" fill="#b5451b" opacity=".7"/>
+      <rect x="62" y="160" width="86" height="80" fill="#2563a8" opacity=".7"/>
+      <rect x="62" y="260" width="86" height="100" fill="#14532d" opacity=".7"/>
+      <text x="105" y="90" fill="rgba(245,240,232,.25)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace">MURAL A</text>
+      <text x="105" y="200" fill="rgba(245,240,232,.25)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace">MURAL B</text>
+      <text x="105" y="310" fill="rgba(245,240,232,.25)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace">MURAL C</text>
+      <!-- Mural walls right -->
+      <rect x="450" y="40" width="90" height="360" fill="#222" rx="2"/>
+      <rect x="452" y="60" width="86" height="80" fill="#7c3aed" opacity=".7"/>
+      <rect x="452" y="160" width="86" height="80" fill="#c2410c" opacity=".7"/>
+      <rect x="452" y="260" width="86" height="100" fill="#0f766e" opacity=".7"/>
+      <text x="495" y="90" fill="rgba(245,240,232,.25)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace">MURAL D</text>
+      <text x="495" y="200" fill="rgba(245,240,232,.25)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace">MURAL E</text>
+      <text x="495" y="310" fill="rgba(245,240,232,.25)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace">MURAL F</text>
+      <!-- Walking figures (arrows showing flow) -->
+      <path d="M300 30 L300 390" stroke="#e8533a" stroke-width="2" marker-end="url(#arr)"/>
+      <path d="M260 30 L260 390" stroke="rgba(232,83,58,.3)" stroke-width="1.5" stroke-dasharray="6,3"/>
+      <path d="M340 390 L340 30" stroke="rgba(232,83,58,.3)" stroke-width="1.5" stroke-dasharray="6,3"/>
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="#e8533a"/>
+        </marker>
+      </defs>
+      <!-- Label -->
+      <rect x="200" y="175" width="200" height="28" rx="2" fill="rgba(232,83,58,.15)"/>
+      <text x="300" y="193" fill="#e8533a" font-size="10" text-anchor="middle" font-family="DM Mono,monospace" font-weight="400">EXISTING: CORRIDOR FLOW</text>
+      <!-- No seating markers -->
+      <text x="300" y="370" fill="rgba(245,240,232,.2)" font-size="8.5" text-anchor="middle" font-family="DM Mono,monospace">no seating · no pause · no engagement</text>
+    </svg>
+  </div>
+  <div class="spotlight-content">
+    <span class="problem-tag">Problem 01</span>
+    <h3>The Park Is a Corridor, Not a Place</h3>
+    <p>
+      Montefiore Park's spatial layout offers no reason to deviate from the
+      straight-line path between entrances. There are no seating nodes, no
+      defined "rooms," and no visual interruptions to slow pedestrian movement.
+      Every design signal says <em>keep walking</em>.
+    </p>
+    <br>
+    <p>
+      The result: average dwell time under two minutes, despite the presence
+      of six commissioned mural panels that took artists months to create.
+      The park functions as infrastructure, not culture.
+    </p>
+  </div>
+</div>
+
+<!-- Spotlight 2 -->
+<div class="spotlight flip reveal">
+  <div class="spotlight-visual">
+    <!-- SVG: No seating facing art diagram -->
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="600" height="420" fill="#141414"/>
+      <!-- Mural wall -->
+      <rect x="30" y="30" width="540" height="120" fill="#1f1f1f"/>
+      <rect x="32" y="32" width="175" height="116" fill="#b5451b" opacity=".6"/>
+      <rect x="215" y="32" width="175" height="116" fill="#2563a8" opacity=".6"/>
+      <rect x="398" y="32" width="170" height="116" fill="#7c3aed" opacity=".6"/>
+      <text x="120" y="98" fill="rgba(255,255,255,.3)" font-size="12" text-anchor="middle" font-family="DM Mono,monospace">MURAL WALL</text>
+      <text x="302" y="98" fill="rgba(255,255,255,.3)" font-size="12" text-anchor="middle" font-family="DM Mono,monospace">MURAL WALL</text>
+      <text x="483" y="98" fill="rgba(255,255,255,.3)" font-size="12" text-anchor="middle" font-family="DM Mono,monospace">MURAL WALL</text>
+      <!-- Wrong-facing benches -->
+      <rect x="80" y="200" width="100" height="22" rx="3" fill="#333"/>
+      <rect x="260" y="200" width="100" height="22" rx="3" fill="#333"/>
+      <rect x="420" y="200" width="100" height="22" rx="3" fill="#333"/>
+      <text x="130" y="215" fill="rgba(245,240,232,.4)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">bench</text>
+      <text x="310" y="215" fill="rgba(245,240,232,.4)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">bench</text>
+      <text x="470" y="215" fill="rgba(245,240,232,.4)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">bench</text>
+      <!-- Arrows pointing AWAY from murals -->
+      <path d="M130 225 L130 300" stroke="#e8533a" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <path d="M310 225 L310 300" stroke="#e8533a" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <path d="M470 225 L470 300" stroke="#e8533a" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <defs>
+        <marker id="arr2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#e8533a"/>
+        </marker>
+      </defs>
+      <!-- X marks -->
+      <text x="130" y="310" fill="#e8533a" font-size="14" text-anchor="middle" font-family="sans-serif">↓</text>
+      <text x="310" y="310" fill="#e8533a" font-size="14" text-anchor="middle" font-family="sans-serif">↓</text>
+      <text x="470" y="310" fill="#e8533a" font-size="14" text-anchor="middle" font-family="sans-serif">↓</text>
+      <text x="130" y="330" fill="rgba(232,83,58,.6)" font-size="8.5" text-anchor="middle" font-family="DM Mono,monospace">facing path</text>
+      <text x="310" y="330" fill="rgba(232,83,58,.6)" font-size="8.5" text-anchor="middle" font-family="DM Mono,monospace">facing path</text>
+      <text x="470" y="330" fill="rgba(232,83,58,.6)" font-size="8.5" text-anchor="middle" font-family="DM Mono,monospace">facing path</text>
+      <!-- Label bar -->
+      <rect x="140" y="370" width="320" height="26" rx="2" fill="rgba(232,83,58,.1)"/>
+      <text x="300" y="387" fill="#e8533a" font-size="9.5" text-anchor="middle" font-family="DM Mono,monospace">BENCHES FACE THE PATH · NOT THE ART</text>
+    </svg>
+  </div>
+  <div class="spotlight-content">
+    <span class="problem-tag">Problem 02</span>
+    <h3>Seating Faces the Wrong Direction</h3>
+    <p>
+      The few benches that exist in Montefiore Park are oriented parallel to
+      the pedestrian path — meaning a seated visitor's natural sightline faces
+      other pedestrians walking by, not the murals lining the walls.
+    </p>
+    <br>
+    <p>
+      This is not a small detail: orientation of seating is the most direct
+      physical cue telling visitors what they are <em>supposed to look at</em>.
+      Benches facing the path say the path is the attraction. They need to face the art.
+    </p>
+  </div>
+</div>
+
+<!-- Spotlight 3 -->
+<div class="spotlight reveal">
+  <div class="spotlight-visual">
+    <!-- SVG: Lighting / evening dead zone -->
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="lp1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f5a623" stop-opacity=".25"/>
+          <stop offset="100%" stop-color="#f5a623" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="lp2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f5a623" stop-opacity=".2"/>
+          <stop offset="100%" stop-color="#f5a623" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="600" height="420" fill="#0a0a0a"/>
+      <!-- Dark mural walls in shadow -->
+      <rect x="40" y="20" width="100" height="380" fill="#111" rx="2"/>
+      <rect x="460" y="20" width="100" height="380" fill="#111" rx="2"/>
+      <!-- Very faint mural color hints -->
+      <rect x="42" y="30" width="96" height="120" fill="#b5451b" opacity=".08"/>
+      <rect x="42" y="165" width="96" height="100" fill="#2563a8" opacity=".08"/>
+      <rect x="42" y="280" width="96" height="100" fill="#14532d" opacity=".08"/>
+      <rect x="462" y="30" width="96" height="120" fill="#7c3aed" opacity=".08"/>
+      <rect x="462" y="165" width="96" height="100" fill="#c2410c" opacity=".08"/>
+      <rect x="462" y="280" width="96" height="100" fill="#0f766e" opacity=".08"/>
+      <!-- One weak streetlight in middle -->
+      <circle cx="300" cy="60" r="120" fill="url(#lp1)"/>
+      <line x1="300" y1="0" x2="300" y2="80" stroke="#f5a623" stroke-width="2" opacity=".5"/>
+      <circle cx="300" cy="55" r="5" fill="#f5a623" opacity=".8"/>
+      <!-- Dark zones labels -->
+      <text x="105" y="210" fill="rgba(232,83,58,.4)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(-90,105,210)">DARK ZONE</text>
+      <text x="495" y="210" fill="rgba(232,83,58,.4)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(90,495,210)">DARK ZONE</text>
+      <!-- Pedestrian hurrying -->
+      <circle cx="300" cy="300" r="6" fill="rgba(245,240,232,.2)" opacity=".6"/>
+      <path d="M300 306 L300 330" stroke="rgba(245,240,232,.2)" stroke-width="1.5"/>
+      <path d="M300 315 L288 325" stroke="rgba(245,240,232,.2)" stroke-width="1.5"/>
+      <path d="M300 315 L312 325" stroke="rgba(245,240,232,.2)" stroke-width="1.5"/>
+      <path d="M300 330 L292 345" stroke="rgba(245,240,232,.2)" stroke-width="1.5"/>
+      <path d="M300 330 L308 345" stroke="rgba(245,240,232,.2)" stroke-width="1.5"/>
+      <!-- Speed arrow -->
+      <path d="M280 370 L330 370" stroke="rgba(232,83,58,.5)" stroke-width="1.5" marker-end="url(#arr3)" stroke-dasharray="4,2"/>
+      <defs>
+        <marker id="arr3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(232,83,58,.5)"/>
+        </marker>
+      </defs>
+      <text x="300" y="400" fill="rgba(232,83,58,.45)" font-size="8.5" text-anchor="middle" font-family="DM Mono,monospace">POOR LIGHTING · MURALS INVISIBLE AFTER DARK</text>
+    </svg>
+  </div>
+  <div class="spotlight-content">
+    <span class="problem-tag">Problem 03</span>
+    <h3>No Lighting, No Programming, No Life After Dark</h3>
+    <p>
+      After 6pm, Montefiore Park empties. A single inadequate streetlight
+      leaves the mural walls in deep shadow, making the space feel unsafe
+      and erasing any possibility of evening community use.
+    </p>
+    <br>
+    <p>
+      Beyond lighting, there is no recurring programming — no events, markets,
+      performances, or workshops — that might give residents a reason to treat
+      the park as a <em>destination</em>. Without activation, any design
+      intervention will remain underused.
+    </p>
+  </div>
+</div>
+
+<!-- ─── SITE ANALYSIS MAP ─── -->
+<section id="analysis" class="section section--mid reveal">
+  <div class="section-label">Site Analysis</div>
+  <h2 class="section-title">Existing Conditions<br>Site Plan</h2>
+  <div class="divider"></div>
+  <p class="section-body">
+    The following diagram maps Montefiore Park's existing spatial structure —
+    identifying the mural wall locations, pedestrian desire lines, lighting gaps,
+    crossing conditions, and zones of opportunity for intervention.
+  </p>
+  <div class="diagram-wrap reveal">
+    <!-- Full site plan SVG -->
+    <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#111">
+      <defs>
+        <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+          <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(245,240,232,.04)" stroke-width=".5"/>
+        </pattern>
+        <marker id="darr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#e8533a"/>
+        </marker>
+        <marker id="garr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#3ecfb1"/>
+        </marker>
+      </defs>
+      <rect width="900" height="560" fill="url(#grid)"/>
+
+      <!-- Streets -->
+      <rect x="0" y="0" width="900" height="60" fill="#1a1a1a"/>
+      <rect x="0" y="500" width="900" height="60" fill="#1a1a1a"/>
+      <rect x="0" y="0" width="60" height="560" fill="#1a1a1a"/>
+      <rect x="840" y="0" width="60" height="560" fill="#1a1a1a"/>
+      <text x="450" y="36" fill="rgba(245,240,232,.4)" font-size="10" text-anchor="middle" font-family="DM Mono,monospace" letter-spacing="2">TREMONT AVENUE</text>
+      <text x="450" y="528" fill="rgba(245,240,232,.4)" font-size="10" text-anchor="middle" font-family="DM Mono,monospace" letter-spacing="2">E 181ST STREET</text>
+      <text x="32" y="290" fill="rgba(245,240,232,.4)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace" letter-spacing="2" transform="rotate(-90,32,290)">MORRIS AVE</text>
+      <text x="868" y="290" fill="rgba(245,240,232,.4)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace" letter-spacing="2" transform="rotate(90,868,290)">GRAND CONCOURSE</text>
+
+      <!-- Park boundary -->
+      <rect x="60" y="60" width="780" height="440" fill="#171717" rx="0"/>
+
+      <!-- Mural walls — left zone -->
+      <rect x="75" y="80" width="18" height="200" fill="#b5451b" opacity=".75" rx="1"/>
+      <rect x="75" y="295" width="18" height="190" fill="#2563a8" opacity=".75" rx="1"/>
+      <text x="84" y="185" fill="rgba(255,255,255,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(-90,84,185)">MURAL A</text>
+      <text x="84" y="395" fill="rgba(255,255,255,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(-90,84,395)">MURAL B</text>
+
+      <!-- Mural walls — right zone -->
+      <rect x="807" y="80" width="18" height="155" fill="#7c3aed" opacity=".75" rx="1"/>
+      <rect x="807" y="250" width="18" height="155" fill="#c2410c" opacity=".75" rx="1"/>
+      <rect x="807" y="420" width="18" height="65" fill="#0f766e" opacity=".75" rx="1"/>
+      <text x="816" y="160" fill="rgba(255,255,255,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(90,816,160)">MURAL D</text>
+      <text x="816" y="328" fill="rgba(255,255,255,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(90,816,328)">MURAL E</text>
+      <text x="816" y="452" fill="rgba(255,255,255,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(90,816,452)">MURAL F</text>
+
+      <!-- Mural wall — top -->
+      <rect x="200" y="72" width="250" height="16" fill="#14532d" opacity=".75" rx="1"/>
+      <text x="325" y="82" fill="rgba(255,255,255,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">MURAL C · NORTH WALL</text>
+
+      <!-- Main path (existing desire line) -->
+      <rect x="360" y="60" width="180" height="440" fill="rgba(245,240,232,.025)"/>
+      <path d="M450 60 L450 500" stroke="#e8533a" stroke-width="1.5" stroke-dasharray="10,5" opacity=".5"/>
+      <text x="450" y="290" fill="rgba(232,83,58,.25)" font-size="28" text-anchor="middle" font-family="DM Mono,monospace" font-weight="700" opacity=".4">→</text>
+
+      <!-- Secondary path -->
+      <path d="M60 280 L840 280" stroke="rgba(245,240,232,.07)" stroke-width="1" stroke-dasharray="6,4"/>
+
+      <!-- Existing benches (wrong orientation) -->
+      <rect x="200" y="220" width="55" height="12" rx="2" fill="#333"/>
+      <rect x="200" y="340" width="55" height="12" rx="2" fill="#333"/>
+      <rect x="640" y="220" width="55" height="12" rx="2" fill="#333"/>
+      <rect x="640" y="340" width="55" height="12" rx="2" fill="#333"/>
+      <text x="227" y="216" fill="rgba(245,240,232,.3)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">bench</text>
+      <text x="667" y="216" fill="rgba(245,240,232,.3)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">bench</text>
+
+      <!-- Lighting zones (dim circles) -->
+      <circle cx="450" cy="160" r="60" fill="rgba(245,164,35,.04)" stroke="rgba(245,164,35,.12)" stroke-width="1" stroke-dasharray="4,4"/>
+      <circle cx="450" cy="400" r="55" fill="rgba(245,164,35,.04)" stroke="rgba(245,164,35,.12)" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="450" y="157" fill="rgba(245,164,35,.45)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">weak light</text>
+      <text x="450" y="397" fill="rgba(245,164,35,.45)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">weak light</text>
+
+      <!-- Opportunity zones (green dashed boxes) -->
+      <rect x="105" y="130" width="200" height="130" fill="none" stroke="#3ecfb1" stroke-width="1" stroke-dasharray="5,3" rx="2" opacity=".5"/>
+      <text x="205" y="126" fill="#3ecfb1" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" opacity=".7">OPPORTUNITY ZONE A</text>
+
+      <rect x="105" y="310" width="200" height="130" fill="none" stroke="#3ecfb1" stroke-width="1" stroke-dasharray="5,3" rx="2" opacity=".5"/>
+      <text x="205" y="306" fill="#3ecfb1" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" opacity=".7">OPPORTUNITY ZONE B</text>
+
+      <rect x="595" y="130" width="200" height="130" fill="none" stroke="#3ecfb1" stroke-width="1" stroke-dasharray="5,3" rx="2" opacity=".5"/>
+      <text x="695" y="126" fill="#3ecfb1" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" opacity=".7">OPPORTUNITY ZONE C</text>
+
+      <rect x="595" y="310" width="200" height="130" fill="none" stroke="#3ecfb1" stroke-width="1" stroke-dasharray="5,3" rx="2" opacity=".5"/>
+      <text x="695" y="306" fill="#3ecfb1" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace" opacity=".7">OPPORTUNITY ZONE D</text>
+
+      <!-- Central plaza zone -->
+      <rect x="345" y="195" width="210" height="170" fill="none" stroke="rgba(232,168,58,.4)" stroke-width="1.5" stroke-dasharray="6,3" rx="2"/>
+      <text x="450" y="282" fill="rgba(232,168,58,.5)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">CENTRAL PLAZA ZONE</text>
+
+      <!-- Crossing points (bad) -->
+      <circle cx="450" cy="60" r="10" fill="none" stroke="#e8533a" stroke-width="1.5" opacity=".7"/>
+      <text x="450" y="56" fill="#e8533a" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">✕</text>
+      <circle cx="450" cy="500" r="10" fill="none" stroke="#e8533a" stroke-width="1.5" opacity=".7"/>
+      <text x="450" y="496" fill="#e8533a" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">✕</text>
+
+      <!-- Legend -->
+      <rect x="630" y="435" width="215" height="100" fill="rgba(10,10,10,.85)" rx="2"/>
+      <text x="643" y="452" fill="rgba(245,240,232,.5)" font-size="7.5" font-family="DM Mono,monospace" font-weight="700" letter-spacing="1">LEGEND</text>
+      <rect x="643" y="460" width="10" height="6" fill="#e8533a" opacity=".8"/>
+      <text x="658" y="466" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Existing mural wall</text>
+      <rect x="643" y="473" width="10" height="2" fill="#3ecfb1" opacity=".7"/>
+      <text x="658" y="478" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Opportunity zone</text>
+      <rect x="643" y="486" width="10" height="6" fill="#333"/>
+      <text x="658" y="491" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Existing seating</text>
+      <circle cx="648" cy="502" r="5" fill="none" stroke="rgba(245,164,35,.5)" stroke-width="1"/>
+      <text x="658" y="506" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Weak lighting zone</text>
+      <circle cx="648" cy="516" r="5" fill="none" stroke="#e8533a" stroke-width="1.5" opacity=".7"/>
+      <text x="658" y="520" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Poor crossing</text>
+
+      <!-- North arrow -->
+      <text x="130" y="490" fill="rgba(245,240,232,.35)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace">N</text>
+      <path d="M130 495 L130 475" stroke="rgba(245,240,232,.35)" stroke-width="1.5" marker-end="url(#garr)"/>
+      <text x="130" y="520" fill="rgba(245,240,232,.2)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">NOT TO SCALE</text>
+
+      <!-- Scale bar -->
+      <line x1="170" y1="515" x2="280" y2="515" stroke="rgba(245,240,232,.3)" stroke-width="1"/>
+      <line x1="170" y1="510" x2="170" y2="520" stroke="rgba(245,240,232,.3)" stroke-width="1"/>
+      <line x1="225" y1="510" x2="225" y2="520" stroke="rgba(245,240,232,.3)" stroke-width="1"/>
+      <line x1="280" y1="510" x2="280" y2="520" stroke="rgba(245,240,232,.3)" stroke-width="1"/>
+      <text x="197" y="509" fill="rgba(245,240,232,.3)" font-size="6.5" text-anchor="middle" font-family="DM Mono,monospace">25m</text>
+      <text x="252" y="509" fill="rgba(245,240,232,.3)" font-size="6.5" text-anchor="middle" font-family="DM Mono,monospace">50m</text>
+    </svg>
+    <div class="diagram-caption">
+      <span>Fig. 1 — Montefiore Park Existing Conditions Plan · Tremont Ave & Morris Ave, Bronx NY</span>
+      <span>Urban Design Studio · 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROPOSALS GRID ─── -->
+<section id="proposals" class="section section--accent">
+  <div class="reveal">
+    <div class="section-label">Design Proposals</div>
+    <h2 class="section-title">Six Moves to<br>Reclaim the Park</h2>
+    <div class="divider"></div>
+    <p class="section-body">
+      Targeted, cost-efficient interventions across three categories —
+      spatial design, infrastructure, and programming — that together
+      convert Montefiore Park from a pass-through into a cultural plaza.
+    </p>
+  </div>
+  <div class="proposals-grid reveal">
+    <div class="proposal-card">
+      <div class="prop-icon"><i class="fa-solid fa-bench-tree"></i></div>
+      <h3>Mural-Facing Seating Alcoves</h3>
+      <p>Curved bench clusters installed opposite each mural panel, angled so the natural seated sightline faces the art. Low-profile planters define each alcove as a spatial "room," creating pause points that disrupt the corridor logic.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="prop-icon"><i class="fa-solid fa-store"></i></div>
+      <h3>Vendor Kiosks & Market Zones</h3>
+      <p>Modular kiosk units positioned at the park's widest section create a community market strip. Vendors face inward toward the park — drawing foot traffic off the through-path and into the cultural space.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="prop-icon"><i class="fa-solid fa-lightbulb"></i></div>
+      <h3>Mural Uplighting & Interpretive Panels</h3>
+      <p>Warm 2700K uplighting on each mural extends cultural activity into evening hours. Weatherproof interpretive panels beside each artwork share artist biographies and mural narratives, making the park a self-guided cultural tour.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="prop-icon"><i class="fa-solid fa-person-walking"></i></div>
+      <h3>Improved Pedestrian Crossings</h3>
+      <p>Raised pedestrian crossings with contrasting pavers at both park entrances slow vehicle speeds and signal priority to pedestrians. High-visibility striping and curb extensions increase safety and the perceived scale of the park zone.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="prop-icon"><i class="fa-solid fa-palette"></i></div>
+      <h3>New Public Art Commissions</h3>
+      <p>An annual open call for Bronx-based artists to add installations, floor murals, and sculptural elements within the newly defined plaza. Rotating commissions ensure the park remains culturally current and provide recurring press moments.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="prop-icon"><i class="fa-solid fa-music"></i></div>
+      <h3>Weekend Programming Calendar</h3>
+      <p>A structured 12-month programming calendar — open mics, mural workshops, film nights, and Saturday markets — gives residents a reason to visit as a destination. Events are co-designed with community board and local schools.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REDESIGN MOCKUPS ─── -->
+<section id="mockups" class="section section--dark reveal">
+  <div class="section-label">Design Visuals</div>
+  <h2 class="section-title">Proposed Design<br>Drawings & Mockups</h2>
+  <div class="divider"></div>
+  <p class="section-body">
+    Annotated design drawings illustrating the spatial interventions at three scales:
+    site plan, zone plan, and component detail.
+  </p>
+
+  <div class="mockup-grid">
+
+    <!-- REDESIGNED SITE PLAN (wide) -->
+    <div class="mockup-card wide">
+      <div class="mockup-label">
+        Fig. 2 — Proposed Master Plan: Montefiore Cultural Plaza
+        <span>Redesign</span>
+      </div>
+      <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#0f0f0f">
+        <defs>
+          <pattern id="grid2" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(245,240,232,.04)" stroke-width=".5"/>
+          </pattern>
+          <radialGradient id="aura1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#3ecfb1" stop-opacity=".18"/>
+            <stop offset="100%" stop-color="#3ecfb1" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="aura2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#e8a83a" stop-opacity=".2"/>
+            <stop offset="100%" stop-color="#e8a83a" stop-opacity="0"/>
+          </radialGradient>
+          <marker id="pa" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill="#3ecfb1"/>
+          </marker>
+        </defs>
+        <rect width="900" height="560" fill="url(#grid2)"/>
+        <!-- Streets -->
+        <rect x="0" y="0" width="900" height="60" fill="#1a1a1a"/>
+        <rect x="0" y="500" width="900" height="60" fill="#1a1a1a"/>
+        <rect x="0" y="0" width="60" height="560" fill="#1a1a1a"/>
+        <rect x="840" y="0" width="60" height="560" fill="#1a1a1a"/>
+        <text x="450" y="36" fill="rgba(245,240,232,.4)" font-size="10" text-anchor="middle" font-family="DM Mono,monospace" letter-spacing="2">TREMONT AVENUE</text>
+        <text x="450" y="528" fill="rgba(245,240,232,.4)" font-size="10" text-anchor="middle" font-family="DM Mono,monospace" letter-spacing="2">E 181ST STREET</text>
+        <!-- Raised crossings (green) -->
+        <rect x="390" y="48" width="120" height="14" fill="#3ecfb1" opacity=".6" rx="1"/>
+        <rect x="390" y="498" width="120" height="14" fill="#3ecfb1" opacity=".6" rx="1"/>
+        <text x="450" y="43" fill="#3ecfb1" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">RAISED CROSSING</text>
+        <text x="450" y="514" fill="#3ecfb1" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">RAISED CROSSING</text>
+
+        <!-- Park area -->
+        <rect x="60" y="60" width="780" height="440" fill="#171717"/>
+
+        <!-- Mural walls -->
+        <rect x="75" y="80" width="18" height="200" fill="#b5451b" opacity=".75" rx="1"/>
+        <rect x="75" y="295" width="18" height="190" fill="#2563a8" opacity=".75" rx="1"/>
+        <rect x="807" y="80" width="18" height="155" fill="#7c3aed" opacity=".75" rx="1"/>
+        <rect x="807" y="250" width="18" height="155" fill="#c2410c" opacity=".75" rx="1"/>
+        <rect x="807" y="420" width="18" height="65" fill="#0f766e" opacity=".75" rx="1"/>
+        <rect x="200" y="72" width="250" height="16" fill="#14532d" opacity=".75" rx="1"/>
+        <text x="325" y="82" fill="rgba(255,255,255,.45)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">MURAL C</text>
+
+        <!-- SEATING ALCOVES (teal, facing murals) -->
+        <!-- Alcove A - left top, facing right (toward mural A) -->
+        <path d="M100 110 Q150 130 100 165" fill="rgba(62,207,177,.15)" stroke="#3ecfb1" stroke-width="1.5"/>
+        <rect x="100" y="125" width="38" height="8" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <rect x="100" y="140" width="38" height="8" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <text x="140" y="143" fill="#3ecfb1" font-size="7" font-family="DM Mono,monospace">alcove</text>
+
+        <!-- Alcove B - left bottom -->
+        <path d="M100 300 Q150 320 100 355" fill="rgba(62,207,177,.15)" stroke="#3ecfb1" stroke-width="1.5"/>
+        <rect x="100" y="315" width="38" height="8" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <rect x="100" y="330" width="38" height="8" rx="2" fill="#3ecfb1" opacity=".7"/>
+
+        <!-- Alcove C - right top -->
+        <path d="M800 110 Q750 130 800 165" fill="rgba(62,207,177,.15)" stroke="#3ecfb1" stroke-width="1.5"/>
+        <rect x="762" y="125" width="38" height="8" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <rect x="762" y="140" width="38" height="8" rx="2" fill="#3ecfb1" opacity=".7"/>
+
+        <!-- Alcove D - right bottom -->
+        <path d="M800 300 Q750 320 800 355" fill="rgba(62,207,177,.15)" stroke="#3ecfb1" stroke-width="1.5"/>
+        <rect x="762" y="315" width="38" height="8" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <rect x="762" y="330" width="38" height="8" rx="2" fill="#3ecfb1" opacity=".7"/>
+
+        <!-- VENDOR KIOSK ZONE (central) -->
+        <rect x="330" y="185" width="240" height="190" fill="rgba(232,168,58,.07)" stroke="rgba(232,168,58,.5)" stroke-width="1" rx="3"/>
+        <text x="450" y="201" fill="rgba(232,168,58,.7)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">VENDOR & MARKET ZONE</text>
+        <!-- Kiosk units -->
+        <rect x="355" y="210" width="40" height="30" rx="2" fill="rgba(232,168,58,.4)"/>
+        <rect x="405" y="210" width="40" height="30" rx="2" fill="rgba(232,168,58,.4)"/>
+        <rect x="455" y="210" width="40" height="30" rx="2" fill="rgba(232,168,58,.4)"/>
+        <rect x="505" y="210" width="40" height="30" rx="2" fill="rgba(232,168,58,.4)"/>
+        <text x="375" y="230" fill="rgba(14,14,14,.6)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">K1</text>
+        <text x="425" y="230" fill="rgba(14,14,14,.6)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">K2</text>
+        <text x="475" y="230" fill="rgba(14,14,14,.6)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">K3</text>
+        <text x="525" y="230" fill="rgba(14,14,14,.6)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">K4</text>
+        <!-- Performance platform -->
+        <ellipse cx="450" cy="320" rx="55" ry="35" fill="rgba(232,83,58,.12)" stroke="#e8533a" stroke-width="1.5" opacity=".8"/>
+        <text x="450" y="316" fill="#e8533a" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">PERFORMANCE</text>
+        <text x="450" y="328" fill="#e8533a" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">PLATFORM</text>
+
+        <!-- LIGHTING (uplights on murals) -->
+        <circle cx="84" cy="185" r="45" fill="url(#aura1)" opacity=".8"/>
+        <circle cx="84" cy="390" r="45" fill="url(#aura1)" opacity=".8"/>
+        <circle cx="816" cy="157" r="45" fill="url(#aura1)" opacity=".8"/>
+        <circle cx="816" cy="328" r="45" fill="url(#aura1)" opacity=".8"/>
+        <!-- Central lighting -->
+        <circle cx="450" cy="135" r="70" fill="url(#aura2)" opacity=".6"/>
+        <circle cx="450" cy="430" r="70" fill="url(#aura2)" opacity=".6"/>
+        <text x="450" y="132" fill="rgba(232,168,58,.5)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">▲ light</text>
+        <text x="450" y="427" fill="rgba(232,168,58,.5)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">▲ light</text>
+
+        <!-- Floor mural / public art zone -->
+        <ellipse cx="200" cy="440" rx="70" ry="40" fill="rgba(232,83,58,.08)" stroke="rgba(232,83,58,.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="200" y="437" fill="rgba(232,83,58,.55)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">FLOOR ART</text>
+        <text x="200" y="448" fill="rgba(232,83,58,.55)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">COMMISSION</text>
+
+        <ellipse cx="700" cy="440" rx="70" ry="40" fill="rgba(232,83,58,.08)" stroke="rgba(232,83,58,.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="700" y="437" fill="rgba(232,83,58,.55)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">FLOOR ART</text>
+        <text x="700" y="448" fill="rgba(232,83,58,.55)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">COMMISSION</text>
+
+        <!-- Interpretive panels (small squares beside murals) -->
+        <rect x="97" y="270" width="12" height="16" rx="1" fill="rgba(245,240,232,.3)"/>
+        <rect x="97" y="475" width="12" height="16" rx="1" fill="rgba(245,240,232,.3)"/>
+        <rect x="791" y="225" width="12" height="16" rx="1" fill="rgba(245,240,232,.3)"/>
+        <text x="110" y="280" fill="rgba(245,240,232,.3)" font-size="6.5" font-family="DM Mono,monospace">info</text>
+        <text x="110" y="485" fill="rgba(245,240,232,.3)" font-size="6.5" font-family="DM Mono,monospace">info</text>
+
+        <!-- Legend -->
+        <rect x="625" y="415" width="230" height="125" fill="rgba(8,8,8,.9)" rx="2"/>
+        <text x="638" y="432" fill="rgba(245,240,232,.6)" font-size="7.5" font-family="DM Mono,monospace" font-weight="700" letter-spacing="1">PROPOSED ELEMENTS</text>
+        <rect x="638" y="440" width="10" height="6" fill="#3ecfb1" opacity=".7"/>
+        <text x="653" y="446" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Mural-facing seating alcove</text>
+        <rect x="638" y="454" width="10" height="6" fill="rgba(232,168,58,.7)"/>
+        <text x="653" y="460" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Vendor kiosk unit</text>
+        <ellipse cx="643" cy="473" rx="5" ry="5" fill="none" stroke="#e8533a" stroke-width="1.5" opacity=".7"/>
+        <text x="653" y="476" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Performance platform</text>
+        <circle cx="643" cy="488" r="5" fill="url(#aura1)"/>
+        <text x="653" y="491" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Mural uplighting</text>
+        <rect x="638" y="499" width="10" height="6" fill="#3ecfb1" opacity=".6"/>
+        <text x="653" y="505" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Raised pedestrian crossing</text>
+        <ellipse cx="643" cy="518" rx="5" ry="4" fill="none" stroke="rgba(232,83,58,.5)" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="653" y="521" fill="rgba(245,240,232,.5)" font-size="7" font-family="DM Mono,monospace">Floor art commission zone</text>
+      </svg>
+    </div>
+
+    <!-- SEATING ALCOVE DETAIL -->
+    <div class="mockup-card">
+      <div class="mockup-label">
+        Fig. 3 — Seating Alcove Detail Plan
+        <span>Detail</span>
+      </div>
+      <svg viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#111">
+        <defs>
+          <radialGradient id="aura3" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#3ecfb1" stop-opacity=".2"/>
+            <stop offset="100%" stop-color="#3ecfb1" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="440" height="320" fill="#111"/>
+        <!-- Grid -->
+        <rect width="440" height="320" fill="none"/>
+        <!-- Mural wall at top -->
+        <rect x="20" y="20" width="400" height="22" fill="#2563a8" opacity=".7" rx="2"/>
+        <text x="220" y="35" fill="rgba(255,255,255,.5)" font-size="9" text-anchor="middle" font-family="DM Mono,monospace">MURAL WALL — NORTH FACE</text>
+        <!-- Uplight glow -->
+        <ellipse cx="220" cy="42" rx="180" ry="55" fill="url(#aura3)"/>
+        <!-- Interpretive panel -->
+        <rect x="60" y="50" width="20" height="28" rx="1" fill="rgba(245,240,232,.2)"/>
+        <text x="70" y="88" fill="rgba(245,240,232,.3)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">INFO</text>
+        <!-- Planter left -->
+        <ellipse cx="95" cy="155" rx="35" ry="28" fill="rgba(20,83,45,.5)" stroke="#166534" stroke-width="1.5" opacity=".8"/>
+        <ellipse cx="95" cy="155" rx="20" ry="15" fill="rgba(20,83,45,.3)"/>
+        <text x="95" y="158" fill="rgba(134,239,172,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">planter</text>
+        <!-- Planter right -->
+        <ellipse cx="345" cy="155" rx="35" ry="28" fill="rgba(20,83,45,.5)" stroke="#166534" stroke-width="1.5" opacity=".8"/>
+        <ellipse cx="345" cy="155" rx="20" ry="15" fill="rgba(20,83,45,.3)"/>
+        <text x="345" y="158" fill="rgba(134,239,172,.5)" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">planter</text>
+        <!-- Curved bench (arc) -->
+        <path d="M130 110 Q220 135 310 110" fill="none" stroke="#3ecfb1" stroke-width="10" stroke-linecap="round" opacity=".8"/>
+        <text x="220" y="130" fill="#3ecfb1" font-size="7.5" text-anchor="middle" font-family="DM Mono,monospace">curved bench</text>
+        <!-- Second bench row -->
+        <path d="M145 155 Q220 178 295 155" fill="none" stroke="rgba(62,207,177,.5)" stroke-width="8" stroke-linecap="round"/>
+        <!-- Person icons sitting (facing upward = facing mural) -->
+        <circle cx="180" cy="107" r="5" fill="rgba(245,240,232,.5)"/>
+        <circle cx="220" cy="112" r="5" fill="rgba(245,240,232,.5)"/>
+        <circle cx="260" cy="107" r="5" fill="rgba(245,240,232,.5)"/>
+        <!-- Sight lines from seated people to mural -->
+        <line x1="180" y1="102" x2="180" y2="55" stroke="rgba(245,240,232,.15)" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="220" y1="107" x2="220" y2="55" stroke="rgba(245,240,232,.15)" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="260" y1="102" x2="260" y2="55" stroke="rgba(245,240,232,.15)" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- Dimensions -->
+        <line x1="20" y1="285" x2="420" y2="285" stroke="rgba(245,240,232,.2)" stroke-width=".5"/>
+        <line x1="20" y1="280" x2="20" y2="290" stroke="rgba(245,240,232,.2)" stroke-width=".5"/>
+        <line x1="420" y1="280" x2="420" y2="290" stroke="rgba(245,240,232,.2)" stroke-width=".5"/>
+        <text x="220" y="300" fill="rgba(245,240,232,.3)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">~12 metres wide</text>
+        <line x1="408" y1="42" x2="408" y2="280" stroke="rgba(245,240,232,.2)" stroke-width=".5"/>
+        <text x="420" y="165" fill="rgba(245,240,232,.3)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(90,420,165)">~8m deep</text>
+        <!-- Label -->
+        <text x="220" y="265" fill="rgba(62,207,177,.4)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">ALCOVE — PLAN VIEW · SIGHTLINES TO MURAL</text>
+      </svg>
+    </div>
+
+    <!-- KIOSK ELEVATION MOCKUP -->
+    <div class="mockup-card">
+      <div class="mockup-label">
+        Fig. 4 — Vendor Kiosk Front Elevation
+        <span>Mockup</span>
+      </div>
+      <svg viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#111">
+        <rect width="440" height="320" fill="#111"/>
+        <!-- Ground -->
+        <rect x="0" y="270" width="440" height="50" fill="#1a1a1a"/>
+        <line x1="0" y1="270" x2="440" y2="270" stroke="rgba(245,240,232,.12)" stroke-width="1"/>
+        <!-- Kiosk body -->
+        <rect x="110" y="100" width="220" height="170" rx="2" fill="#1f1f1f" stroke="rgba(245,240,232,.15)" stroke-width="1.5"/>
+        <!-- Roof overhang -->
+        <rect x="90" y="88" width="260" height="18" rx="2" fill="#2a2a2a" stroke="rgba(245,240,232,.1)" stroke-width="1"/>
+        <!-- Canopy fabric -->
+        <path d="M90 88 Q220 70 350 88" fill="rgba(232,168,58,.2)" stroke="#e8a83a" stroke-width="1.5" opacity=".8"/>
+        <!-- Sign board -->
+        <rect x="120" y="108" width="200" height="35" rx="1" fill="rgba(232,168,58,.15)" stroke="rgba(232,168,58,.4)" stroke-width="1"/>
+        <text x="220" y="121" fill="#e8a83a" font-size="10" text-anchor="middle" font-family="DM Mono,monospace">BRONX ARTS</text>
+        <text x="220" y="133" fill="#e8a83a" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">MARKET · MONTEFIORE</text>
+        <!-- Counter / service window -->
+        <rect x="115" y="175" width="210" height="60" rx="1" fill="#252525" stroke="rgba(245,240,232,.1)" stroke-width="1"/>
+        <rect x="125" y="185" width="190" height="8" rx="1" fill="rgba(245,240,232,.07)"/>
+        <!-- Items on counter (abstract) -->
+        <circle cx="160" cy="208" r="8" fill="rgba(232,83,58,.3)" stroke="rgba(232,83,58,.6)" stroke-width="1"/>
+        <circle cx="185" cy="208" r="8" fill="rgba(62,207,177,.3)" stroke="rgba(62,207,177,.6)" stroke-width="1"/>
+        <rect x="200" y="200" width="30" height="16" rx="1" fill="rgba(245,240,232,.1)"/>
+        <rect x="240" y="200" width="25" height="16" rx="1" fill="rgba(245,240,232,.1)"/>
+        <rect x="275" y="200" width="20" height="16" rx="1" fill="rgba(245,240,232,.1)"/>
+        <!-- Side panels -->
+        <rect x="110" y="150" width="20" height="120" rx="1" fill="#252525" stroke="rgba(245,240,232,.08)" stroke-width="1"/>
+        <rect x="310" y="150" width="20" height="120" rx="1" fill="#252525" stroke="rgba(245,240,232,.08)" stroke-width="1"/>
+        <!-- QR / info tag -->
+        <rect x="290" y="112" width="28" height="28" rx="1" fill="rgba(245,240,232,.08)" stroke="rgba(245,240,232,.15)" stroke-width="1"/>
+        <text x="304" y="130" fill="rgba(245,240,232,.3)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">QR</text>
+        <!-- Dimension lines -->
+        <line x1="90" y1="290" x2="350" y2="290" stroke="rgba(245,240,232,.2)" stroke-width=".5"/>
+        <line x1="90" y1="285" x2="90" y2="295" stroke="rgba(245,240,232,.2)" stroke-width=".5"/>
+        <line x1="350" y1="285" x2="350" y2="295" stroke="rgba(245,240,232,.2)" stroke-width=".5"/>
+        <text x="220" y="308" fill="rgba(245,240,232,.3)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">2.6m wide × 2.2m tall</text>
+        <!-- Label -->
+        <text x="220" y="78" fill="rgba(232,168,58,.5)" font-size="8.5" text-anchor="middle" font-family="DM Mono,monospace">STANDARD VENDOR KIOSK — FRONT ELEVATION</text>
+      </svg>
+    </div>
+
+    <!-- BEFORE/AFTER SECTION (within mockups) - crossing detail -->
+    <div class="mockup-card">
+      <div class="mockup-label">
+        Fig. 5 — Pedestrian Crossing: Before & After
+        <span>Infrastructure</span>
+      </div>
+      <svg viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#111">
+        <rect width="440" height="320" fill="#111"/>
+        <!-- Divider -->
+        <line x1="220" y1="0" x2="220" y2="320" stroke="rgba(245,240,232,.08)" stroke-width="1" stroke-dasharray="6,4"/>
+
+        <!-- BEFORE (left) -->
+        <text x="110" y="24" fill="rgba(232,83,58,.7)" font-size="8.5" text-anchor="middle" font-family="DM Mono,monospace">BEFORE</text>
+        <!-- Road surface -->
+        <rect x="20" y="40" width="180" height="220" fill="#1a1a1a"/>
+        <!-- Pavement markings (faded) -->
+        <line x1="110" y1="40" x2="110" y2="260" stroke="rgba(245,240,232,.07)" stroke-width="12"/>
+        <!-- Curb (flush, no raise) -->
+        <rect x="20" y="40" width="180" height="8" fill="#222"/>
+        <rect x="20" y="252" width="180" height="8" fill="#222"/>
+        <!-- Car -->
+        <rect x="60" y="130" width="60" height="35" rx="3" fill="#333" stroke="#e8533a" stroke-width="1"/>
+        <text x="90" y="152" fill="#e8533a" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">vehicle</text>
+        <!-- Pedestrian waiting -->
+        <circle cx="40" cy="150" r="6" fill="rgba(245,240,232,.3)"/>
+        <path d="M40 156 L40 175 M40 163 L32 172 M40 163 L48 172" stroke="rgba(245,240,232,.3)" stroke-width="1.5"/>
+        <!-- No priority signal -->
+        <text x="30" y="195" fill="rgba(232,83,58,.5)" font-size="8" font-family="DM Mono,monospace">no priority</text>
+        <text x="30" y="206" fill="rgba(232,83,58,.5)" font-size="8" font-family="DM Mono,monospace">no raise</text>
+
+        <!-- AFTER (right) -->
+        <text x="330" y="24" fill="rgba(62,207,177,.7)" font-size="8.5" text-anchor="middle" font-family="DM Mono,monospace">AFTER</text>
+        <!-- Road surface -->
+        <rect x="240" y="40" width="180" height="220" fill="#1a1a1a"/>
+        <!-- Raised crossing (teal paver area) -->
+        <rect x="240" y="118" width="180" height="52" fill="rgba(62,207,177,.15)" stroke="#3ecfb1" stroke-width="1.5"/>
+        <!-- Contrasting pavers -->
+        <rect x="240" y="118" width="22" height="52" fill="rgba(62,207,177,.2)"/>
+        <rect x="264" y="118" width="22" height="52" fill="rgba(62,207,177,.08)"/>
+        <rect x="288" y="118" width="22" height="52" fill="rgba(62,207,177,.2)"/>
+        <rect x="312" y="118" width="22" height="52" fill="rgba(62,207,177,.08)"/>
+        <rect x="336" y="118" width="22" height="52" fill="rgba(62,207,177,.2)"/>
+        <rect x="360" y="118" width="22" height="52" fill="rgba(62,207,177,.08)"/>
+        <rect x="384" y="118" width="22" height="52" fill="rgba(62,207,177,.2)"/>
+        <!-- Raised curb indicators -->
+        <rect x="240" y="40" width="180" height="6" fill="#3ecfb1" opacity=".5"/>
+        <rect x="240" y="254" width="180" height="6" fill="#3ecfb1" opacity=".5"/>
+        <!-- Car slowed -->
+        <rect x="280" y="73" width="55" height="32" rx="3" fill="#333" stroke="rgba(62,207,177,.4)" stroke-width="1"/>
+        <text x="307" y="93" fill="rgba(62,207,177,.5)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">slowed</text>
+        <!-- Pedestrian crossing freely -->
+        <circle cx="330" cy="140" r="6" fill="rgba(245,240,232,.6)"/>
+        <path d="M330 146 L330 165 M330 153 L322 162 M330 153 L338 162" stroke="rgba(245,240,232,.6)" stroke-width="1.5"/>
+        <!-- Priority label -->
+        <text x="260" y="210" fill="rgba(62,207,177,.6)" font-size="8" font-family="DM Mono,monospace">raised table</text>
+        <text x="260" y="221" fill="rgba(62,207,177,.6)" font-size="8" font-family="DM Mono,monospace">ped priority</text>
+        <!-- Check -->
+        <text x="330" y="195" fill="#3ecfb1" font-size="12" text-anchor="middle" font-family="sans-serif">✓</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── PROGRAMMING ─── -->
+<section id="programming" class="section section--teal reveal">
+  <div class="section-label">Weekend Programming</div>
+  <h2 class="section-title">The Cultural<br>Calendar</h2>
+  <div class="divider"></div>
+  <p class="section-body">
+    Year-round programming is what converts a redesigned space into a living
+    community institution. The following calendar runs alongside the physical
+    interventions to generate consistent foot traffic and cultural activation.
+  </p>
+  <div class="prog-grid reveal">
+    <div class="prog-card">
+      <div class="prog-day">Monthly · Saturday</div>
+      <h4>Bronx Arts Market</h4>
+      <p>12 vendor stalls featuring Bronx-based artists, printmakers, ceramic artists, and makers. Kiosks open from 10am–5pm. Free entry.</p>
+      <span class="prog-tag">Vendor</span>
+    </div>
+    <div class="prog-card">
+      <div class="prog-day">Monthly · Friday Evening</div>
+      <h4>Mural Cinema Night</h4>
+      <p>Outdoor film screenings where the film connects thematically to one of the park's murals. Pre-screening artist talk. 30–80 seated attendees.</p>
+      <span class="prog-tag">Arts</span>
+    </div>
+    <div class="prog-card">
+      <div class="prog-day">Bi-Weekly · Sunday</div>
+      <h4>Open Mic & Performance</h4>
+      <p>Community-run open mic with acoustic music, poetry, and spoken word on the new performance platform. Facing the murals.</p>
+      <span class="prog-tag">Performance</span>
+    </div>
+    <div class="prog-card">
+      <div class="prog-day">Quarterly · Weekend</div>
+      <h4>Live Mural Workshop</h4>
+      <p>Public mural-making workshops led by the commissioned artists and local youth programs. Participants become co-creators of the space.</p>
+      <span class="prog-tag">Workshop</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BEFORE / AFTER COMPARISON ─── -->
+<section id="compare" class="section section--panel reveal">
+  <div class="section-label">Impact Assessment</div>
+  <h2 class="section-title">Before & After:<br>Spatial Transformation</h2>
+  <div class="divider"></div>
+  <p class="section-body">
+    A side-by-side comparison of Montefiore Park's pedestrian experience
+    under the current conditions versus the proposed redesign.
+  </p>
+  <div class="compare-wrap reveal">
+    <!-- BEFORE panel -->
+    <div class="compare-panel">
+      <div class="compare-header">
+        <div class="dot dot-red"></div>
+        Current Condition — Passive Corridor
+      </div>
+      <svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#111">
+        <rect width="440" height="300" fill="#111"/>
+        <!-- Simple corridor view -->
+        <rect x="0" y="0" width="60" height="300" fill="#1a1a1a"/>
+        <rect x="380" y="0" width="60" height="300" fill="#1a1a1a"/>
+        <rect x="60" y="0" width="320" height="300" fill="#151515"/>
+        <!-- Dark mural walls -->
+        <rect x="62" y="10" width="16" height="280" fill="#222"/>
+        <rect x="380" y="10" width="16" height="280" fill="#222"/>
+        <!-- Benches sideways (wrong way) -->
+        <rect x="120" y="120" width="80" height="14" rx="2" fill="#2a2a2a"/>
+        <rect x="240" y="120" width="80" height="14" rx="2" fill="#2a2a2a"/>
+        <!-- Pedestrian arrows straight through -->
+        <path d="M220 280 L220 20" stroke="#e8533a" stroke-width="2.5" marker-end="url(#rarr)"/>
+        <defs>
+          <marker id="rarr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill="#e8533a"/>
+          </marker>
+          <marker id="garr2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill="#3ecfb1"/>
+          </marker>
+        </defs>
+        <!-- Metrics -->
+        <text x="220" y="260" fill="rgba(232,83,58,.6)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">avg dwell: &lt;2 min</text>
+        <!-- Problem labels -->
+        <text x="85" y="155" fill="rgba(232,83,58,.35)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(-90,85,155)">no light</text>
+        <text x="395" y="155" fill="rgba(232,83,58,.35)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace" transform="rotate(90,395,155)">no light</text>
+        <text x="160" y="115" fill="rgba(232,83,58,.35)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">wrong direction</text>
+        <text x="280" y="115" fill="rgba(232,83,58,.35)" font-size="7" text-anchor="middle" font-family="DM Mono,monospace">wrong direction</text>
+      </svg>
+    </div>
+    <!-- AFTER panel -->
+    <div class="compare-panel">
+      <div class="compare-header">
+        <div class="dot dot-green"></div>
+        Proposed Design — Cultural Plaza
+      </div>
+      <svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;background:#111">
+        <defs>
+          <radialGradient id="gl" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#3ecfb1" stop-opacity=".25"/>
+            <stop offset="100%" stop-color="#3ecfb1" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="cl" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#e8a83a" stop-opacity=".2"/>
+            <stop offset="100%" stop-color="#e8a83a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="440" height="300" fill="#111"/>
+        <!-- Park area -->
+        <rect x="0" y="0" width="60" height="300" fill="#1a1a1a"/>
+        <rect x="380" y="0" width="60" height="300" fill="#1a1a1a"/>
+        <rect x="60" y="0" width="320" height="300" fill="#151515"/>
+        <!-- Lit mural walls -->
+        <rect x="62" y="10" width="16" height="280" fill="#2563a8" opacity=".6"/>
+        <rect x="380" y="10" width="16" height="280" fill="#c2410c" opacity=".6"/>
+        <!-- Mural glow -->
+        <circle cx="70" cy="150" r="80" fill="url(#gl)"/>
+        <circle cx="388" cy="150" r="80" fill="url(#gl)"/>
+        <!-- Alcove seating (facing murals) -->
+        <path d="M90 100 Q155 130 90 175" fill="rgba(62,207,177,.1)" stroke="#3ecfb1" stroke-width="1.5"/>
+        <rect x="90" y="118" width="40" height="7" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <rect x="90" y="133" width="40" height="7" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <path d="M350 100 Q285 130 350 175" fill="rgba(62,207,177,.1)" stroke="#3ecfb1" stroke-width="1.5"/>
+        <rect x="310" y="118" width="40" height="7" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <rect x="310" y="133" width="40" height="7" rx="2" fill="#3ecfb1" opacity=".7"/>
+        <!-- Central plaza activity -->
+        <ellipse cx="220" cy="175" rx="55" ry="35" fill="rgba(232,168,58,.08)" stroke="rgba(232,168,58,.4)" stroke-width="1"/>
+        <circle cx="220" cy="155" r="70" fill="url(#cl)"/>
+        <text x="220" y="172" fill="rgba(232,168,58,.7)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">market zone</text>
+        <!-- Pedestrian flow (dispersed, multi-directional) -->
+        <path d="M220 280 L220 30" stroke="rgba(62,207,177,.3)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#garr2)"/>
+        <path d="M220 150 L100 150" stroke="rgba(62,207,177,.3)" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <path d="M220 150 L340 150" stroke="rgba(62,207,177,.3)" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- Dwell time -->
+        <text x="220" y="260" fill="rgba(62,207,177,.6)" font-size="8" text-anchor="middle" font-family="DM Mono,monospace">target dwell: 15–30 min</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact" class="section section--mid reveal">
+  <div class="section-label">Get Involved</div>
+  <h2 class="section-title">This Belongs<br>to the Bronx.</h2>
+  <div class="divider"></div>
+  <p class="section-body">
+    This proposal is community-driven. Whether you're a resident, artist,
+    local business, educator, or policy advocate — sign the petition, attend
+    a workshop, or reach out directly.
+  </p>
+  <div class="contact-split">
+    <div>
+      <div class="form-row">
+        <div>
+          <label for="fname">Name</label>
+          <input type="text" id="fname" placeholder="Your name"/>
+        </div>
+        <div>
+          <label for="femail">Email</label>
+          <input type="email" id="femail" placeholder="your@email.com"/>
+        </div>
+      </div>
+      <label for="frole">I am a…</label>
+      <select id="frole" style="margin-bottom:1.2rem;">
+        <option>Bronx Resident</option>
+        <option>Local Artist</option>
+        <option>Educator / School</option>
+        <option>Local Business</option>
+        <option>Community Board Member</option>
+        <option>Other</option>
+      </select>
+      <label for="fmsg">Message or interest</label>
+      <textarea id="fmsg" placeholder="How would you like to get involved?"></textarea>
+      <a href="#" class="btn btn-primary" style="margin-top:.5rem;">
+        <i class="fa-solid fa-paper-plane"></i> Send Message
+      </a>
+    </div>
+    <div>
+      <ul class="contact-info">
+        <li>
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <strong>Location</strong>
+            <span>Montefiore Park, Tremont Ave & Morris Ave<br>Bronx, New York 10457</span>
+          </div>
+        </li>
+        <li>
+          <i class="fa-solid fa-envelope"></i>
+          <div>
+            <strong>Email</strong>
+            <span>hello@montefioreartspark.org</span>
+          </div>
+        </li>
+        <li>
+          <i class="fa-solid fa-calendar-days"></i>
+          <div>
+            <strong>Next Workshop</strong>
+            <span>Community Design Workshop<br>Third Saturday — 11am at the park</span>
+          </div>
+        </li>
+        <li>
+          <i class="fa-brands fa-instagram"></i>
+          <div>
+            <strong>Follow</strong>
+            <span>#StayMontefiore &nbsp;·&nbsp; @montefioreartspark</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    Montefiore Park — Arts & Culture Redesign Initiative · Bronx, NY
+    <span style="margin-left:1.5rem;opacity:.5;">Academic Design Review · Urban Design Studio 2025</span>
+  </div>
+  <div>
+    Visually inspired by <a href="https://html5up.net/hyperspace" target="_blank">Hyperspace · HTML5 UP</a>
+    &nbsp;·&nbsp; CCA 3.0 License
+  </div>
+</footer>
+
+</div><!-- /main -->
+
+<script>
+// ── SIDEBAR ACTIVE STATE ──
+const sections=document.querySelectorAll('section[id],div[id]');
+const navLinks=document.querySelectorAll('#nav-menu a');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const a=document.querySelector(`#nav-menu a[href="#${e.target.id}"]`);
+      if(a)a.classList.add('active');
+    }
+  });
+},{threshold:0.35});
+sections.forEach(s=>io.observe(s));
+
+// ── SCROLL REVEAL ──
+const revealEls=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}
+  });
+},{threshold:0.1});
+revealEls.forEach(el=>ro.observe(el));
+
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
+});
+</script>
+</body>
+</html>
